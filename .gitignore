@@ -1,0 +1,8 @@
+# Terraform state (contains sensitive data)
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Vars file contains your subscription ID
+terraform.tfvars

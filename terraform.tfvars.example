@@ -1,0 +1,5 @@
+subscription_id      = "your-subscription-id-here"
+storage_account_name = "storage_account_name"
+resource_group_name  = "rg_name"
+location             = "<Region>"
+project_name         = "project_name"
