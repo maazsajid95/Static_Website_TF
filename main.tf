@@ -5,13 +5,19 @@ terraform {
       version = "~> 3.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "mathpracs-tfstate-rg"
+    storage_account_name = "mathpracstfstate"
+    container_name       = "tfstate"
+    key                  = "static-site.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
   features {}
-  subscription_id = var.subscription_id
+  subscription_id            = var.subscription_id
   skip_provider_registration = true
-
 }
 
 # Resource Group
@@ -73,13 +79,13 @@ resource "azurerm_cdn_frontdoor_origin_group" "main" {
 
 # Front Door Origin (points to storage account)
 resource "azurerm_cdn_frontdoor_origin" "main" {
-  name                          = "storage-origin"
-  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.main.id
-  host_name                     = azurerm_storage_account.main.primary_web_host
-  origin_host_header            = azurerm_storage_account.main.primary_web_host
-  https_port                    = 443
-  http_port                     = 80
-  enabled                       = true
+  name                           = "storage-origin"
+  cdn_frontdoor_origin_group_id  = azurerm_cdn_frontdoor_origin_group.main.id
+  host_name                      = azurerm_storage_account.main.primary_web_host
+  origin_host_header             = azurerm_storage_account.main.primary_web_host
+  https_port                     = 443
+  http_port                      = 80
+  enabled                        = true
   certificate_name_check_enabled = false
 }
 
