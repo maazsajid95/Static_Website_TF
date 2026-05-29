@@ -57,7 +57,7 @@ terraform apply
 **7. Upload your site files**
 ```bash
 az storage blob upload-batch \
-  --account-name <your_storage_account_name> \
+  --account-name <mathpracsstorage> \
   --destination '$web' \
   --source . \
   --pattern "*.html" \
