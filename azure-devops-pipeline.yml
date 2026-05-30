@@ -7,6 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
+  group: terraform-vars
   serviceConnection: 'maazhotmail-azure-connection'
   backendResourceGroup: 'mathpracs-tfstate-rg'
   backendStorageAccount: 'mathpracstfstate'
