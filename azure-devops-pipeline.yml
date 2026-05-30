@@ -7,12 +7,17 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  group: terraform-vars
-  serviceConnection: 'maazhotmail-azure-connection'
-  backendResourceGroup: 'mathpracs-tfstate-rg'
-  backendStorageAccount: 'mathpracstfstate'
-  backendContainer: 'tfstate'
-  backendKey: 'static-site.terraform.tfstate'
+  - group: terraform-vars
+  - name: serviceConnection
+    value: 'maazhotmail-azure-connection'
+  - name: backendResourceGroup
+    value: 'mathpracs-tfstate-rg'
+  - name: backendStorageAccount
+    value: 'mathpracstfstate'
+  - name: backendContainer
+    value: 'tfstate'
+  - name: backendKey
+    value: 'static-site.terraform.tfstate'
 
 stages:
   - stage: Validate
@@ -49,6 +54,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               environmentServiceNameAzureRM: $(serviceConnection)
+              commandOptions: '-var="storage_account_name=$(storage_account_name)" -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="project_name=$(project_name)" -var="subscription_id=$(subscription_id)"'
 
   - stage: Deploy
     displayName: 'Terraform Apply'
@@ -86,3 +92,4 @@ stages:
                     provider: 'azurerm'
                     command: 'apply'
                     environmentServiceNameAzureRM: $(serviceConnection)
+                    commandOptions: '-var="storage_account_name=$(storage_account_name)" -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="project_name=$(project_name)" -var="subscription_id=$(subscription_id)"'
