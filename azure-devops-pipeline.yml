@@ -12,7 +12,6 @@ variables:
   backendStorageAccount: 'mathpracstfstate'
   backendContainer: 'tfstate'
   backendKey: 'static-site.terraform.tfstate'
-  subscriptionId: '8fcfa76b-ece5-43d2-a613-3d21bed48411'
 
 stages:
   - stage: Validate
